@@ -1,46 +1,90 @@
-
-import { getSession } from "next-auth/react"
-import { Card } from "./components/homecard"
+import { CardData } from "./components/homecard"
 import Image from "next/image"
 import { getUser } from "./api/auth/[...nextauth]/route"
+import { ListData } from "@/lib/utils"
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import { useTheme } from "next-themes";
+
 export default  async function Home() {
-  const res = await fetch('https://fakestoreapi.com/products')
-    const data = await res.json()
-    const user = await getUser()
-     
+const data = await ListData()
+const user = await getUser()
     return(
-<div className="flex flex-col gap-4">
+<div className="flex flex-col gap-4 card">
 {
     data.length > 0 ? (
 <div  className="  justify-center  mt-4 flex flex-row gap-8 flex-wrap items-center text-center">
 {
     data.map((itm :any) =>(
         <div key={itm.id}>
-<Card itm={itm}  isHome={true} user={user}/>
+<CardData itm={itm} user={user} isHome={true}/>
     </div>
     ))
 }
-
-
 </div>
     ) :(
-        <div className="  bg-contain  bg-blur  relative    bg-slate-300  rounded-lg flex flex-row items-center  text-center justify-center  gap-2 flex-wrap"   >
-        <Image 
-        className="rounded-lg cursor-pointer mr-8"
-        width={40}
-        height={40}
-        alt=""
-        src="/assets/icons/search.svg"
-        />
-        <p className=" cursor-pointer ">Laoding ... </p>
+        <div className="flex w-screen h-screen bg-white-2 flex-col gap-3 items-center justify-start ">
+        <div className=" flex  gap-20  ml-5  h-[700px]">
+        <Stack spacing={2}>
+              {/* For variant="text", adjust the height via font-size */}
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+        
+              {/* For other variants, adjust the size with `width` and `height` */}
+              <Skeleton variant="circular" width={100} height={100} />
+              <Skeleton variant="rectangular" width={500} height={200} />
+              <Skeleton variant="rounded" width={500} height={200} />
+            </Stack>
+            <Stack spacing={1}>
+              {/* For variant="text", adjust the height via font-size */}
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+        
+              {/* For other variants, adjust the size with `width` and `height` */}
+              <Skeleton variant="circular" width={100} height={100} />
+              <Skeleton variant="rectangular" width={500} height={200} />
+              <Skeleton variant="rounded" width={500} height={200} />
+            </Stack>
+            <Stack spacing={1}>
+              {/* For variant="text", adjust the height via font-size */}
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+        
+              {/* For other variants, adjust the size with `width` and `height` */}
+              <Skeleton variant="circular" width={100} height={100} />
+              <Skeleton variant="rectangular" width={500} height={200} />
+              <Skeleton variant="rounded" width={500} height={200} />
+            </Stack>
         </div>
-    )
+        <div className=" flex  gap-20  ml-5  h-[700px]">
+        <Stack spacing={2}>
+              {/* For variant="text", adjust the height via font-size */}
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+        
+              {/* For other variants, adjust the size with `width` and `height` */}
+              <Skeleton variant="circular" width={100} height={100} />
+              <Skeleton variant="rectangular" width={500} height={200} />
+              <Skeleton variant="rounded" width={500} height={200} />
+            </Stack>
+            <Stack spacing={1}>
+              {/* For variant="text", adjust the height via font-size */}
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+        
+              {/* For other variants, adjust the size with `width` and `height` */}
+              <Skeleton variant="circular" width={100} height={100} />
+              <Skeleton variant="rectangular" width={500} height={200} />
+              <Skeleton variant="rounded" width={500} height={200} />
+            </Stack>
+            <Stack spacing={1}>
+              {/* For variant="text", adjust the height via font-size */}
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+        
+              {/* For other variants, adjust the size with `width` and `height` */}
+              <Skeleton variant="circular" width={100} height={100} />
+              <Skeleton variant="rectangular" width={500} height={200} />
+              <Skeleton variant="rounded" width={500} height={200} />
+            </Stack>
+        </div>
+        </div>
+    ) 
 }
-
-
-
-
 </div>
     )
-    
 }

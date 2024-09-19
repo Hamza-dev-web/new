@@ -3,19 +3,27 @@ import { v } from "convex/values";
 
 export default defineSchema({
   users: defineTable({
-    Firstname: v.string(),
-    Lastname: v.string(),
+    name: v.string(),
     email : v.string(),
-    storedFilm : v.array(v.object({
-      idofMovie : v.string(),
-      title : v.string(),
-      price : v.number(),
-      description :v.optional(v.string()),
-      image :v.string(),
-      category : v.optional(v.string())
+    avatarUrl : v.string(),
+products :  v.array(v.object({
+  productId : v.id("product"),
+  title: v.string(),
+  description : v.string(),
+  price :v.number(),
+  category : v.string(),
+  image :v.string(), 
+  countity:v.number(),
+}))
+}),
+product: defineTable({
+  author : v.id("users") ,
+  title: v.string(),
+  description : v.string(),
+  price :v.number(),
+  category : v.string(),
+  image :v.string(), 
+  countity:v.number(),
 
-    }))
 })
-  
-
 })

@@ -2,7 +2,7 @@ import type { NextAuthOptions } from "next-auth"
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth, { getServerSession } from "next-auth"
-import { User, connectToDatabase } from "@/lib"
+
  export const Options: NextAuthOptions = {
 
   session :{
@@ -22,19 +22,9 @@ import { User, connectToDatabase } from "@/lib"
       if(!profile?.email) {
         throw new Error("no user")
       }
-      if(profile.name){
-      await connectToDatabase()
-        const user ={
-          email : profile.email,
-          name :profile.name
-        }
-       const userCre=  await User.create(user)
-        console.log("crett" ,userCre)
-    
-        return JSON.parse(JSON.stringify(userCre))
-      }
-  
-    
+ 
+
+return profile && true     
     },
   
     async session({ session, token }: { session: any; token: any }) {

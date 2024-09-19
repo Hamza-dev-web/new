@@ -1,62 +1,44 @@
-import { title } from "process";
+
+import { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
-export const CreateUsers = mutation({
-    args: { Firstname: v.string() , Lastname :v.string() , email:v.string()},
+export const CreateUser = mutation({
+    args: { name: v.string() , email :v.string(),avatarUrl :v.string() },
     handler: async (ctx, args) => {
-      const newTaskId = await ctx.db.insert("users", { Firstname: args.Firstname , Lastname:args.Lastname , email : args.email as string , storedFilm :[]});
-      return newTaskId;
+   const user = await ctx.db.query("users").filter((e) => e.eq(e.field("email"),args.email )).collect()
+   if(user.length > 0 && user[0].email  == args.email ) return user[0]
+      const newuser = await ctx.db.insert("users", { name: args.name ,  email : args.email , avatarUrl : args.avatarUrl , products :[] });
+      return newuser;
     },
-  });
-  export const saveAMovie = mutation ({
-    args: { Firstname: v.string() , idofMovie :v.string() , title:v.string() ,price :v.number() ,description : v.optional(v.string()) , image : v.string() , category :v.optional(v.string()) },
-    handler: async (ctx, args) => {
-      const user = await ctx.db.query("users").filter((e) => e.eq(e.field('Firstname' ) ,args.Firstname)).collect()
-      if(user.length == 0){
-        return console.log("err")
-      }
-      const data ={
-        idofMovie : args.idofMovie,
-        title : args.title,
-        price : args.price,
-        description : args.description ,
-        category :args.category ,
-        image : args.image
-
-      }
-      await ctx.db.patch(user[0]._id , {...user[0],storedFilm : [...user[0].storedFilm , data]})
-
-    },
-
-
   })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  export const GetUsers = query({
-    args: { },
-    handler: async (ctx) => {
-        const tasks = await ctx.db
-        .query("users").collect();
+  export const GetUser = query({
+    args: {email:v.string()},
+    handler: async (ctx , args) => {
       
-      return tasks;
+        const user = await ctx.db.query("users").filter((e) => e.eq(e.field("email"),args.email )).collect()
+      
+      return user;
       
     },
-  });// to get all users
-
+  })
+  export const GetUserbyId = query({
+    args: {id:v.string()},
+    handler: async (ctx , args) => {
+      
+        const user = await ctx.db.query("users").filter((e) => e.eq(e.field("_id"),args.id )).collect()
+      
+      return user;
+      
+    },
+  })
+  export const DeleteUser = mutation({
+    args: {id:v.string()},
+    handler: async (ctx , args) => {
+     await ctx.db.delete(args.id as Id<"users">)
+    
+      
+    },
+  })
 
   
  
