@@ -1,4 +1,3 @@
-import { RequestHandler } from "next/dist/server/next";
 
 import Stripe from "stripe"
 

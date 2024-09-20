@@ -10,6 +10,7 @@ export default function ProtectRoute ({children , user } :{children :React.React
 
 let userdb= null
 const CreateUser = useMutation(api.users.CreateUser)
+let usepass =null
 if(user != undefined  ){
 userdb = useQuery(api.users.GetUser,{email :user.email})
 if(userdb == null && user != undefined) {
@@ -19,13 +20,16 @@ if(userdb == null && user != undefined) {
         avatarUrl :user.image,
 
       })
+      
+    
+}
+if(userdb != null ){
+    usepass ={
+        _id :userdb&&  userdb[0]._id,
+    
+    }
 }
 }
-const userPass ={
-    _id :userdb&&  userdb[0]._id,
-
-}
-
 
     return (
         <> 
@@ -34,7 +38,7 @@ const userPass ={
            ) :
          (
             <>
-            <Navbar user={userPass}/>
+            <Navbar user={usepass}/>
             {children}
             </>
         )}

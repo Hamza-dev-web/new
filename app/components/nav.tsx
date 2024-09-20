@@ -47,7 +47,7 @@ height={150}
     } } className="mt-20 " />
 
 <div className="  mt-3 items-center flex flex-row  justify-between gap-3 flex-wrap">
-<Link href={`/${user._id}/profile`}>
+<Link href={`/${user?._id}/profile`}>
 <Image 
 src="/assets/icons/profile.svg"
 alt=""
@@ -67,7 +67,8 @@ height={40}
 </Link>
 
 <div  onClick={() => {
-    DeleteUser(user._id)
+    DeleteUser({id : user._id})
+    signOut()
 }} className="   items-center  flex  p-3 cursor-pointer ">
 <Badge>
 SignOut
