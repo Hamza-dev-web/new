@@ -1,5 +1,4 @@
 "use client"
-import { AddItems } from "@/lib/action"
 import { api } from "@/convex/_generated/api"
 import { useMutation } from "convex/react"
 import Image from "next/image"
@@ -47,15 +46,14 @@ console.log(price)
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ amount: price}),
   })
-    .then((res) => res.json())
+    .then(async(res) => res.json())
     .then((data) => {
-      console.log(data)
+console.log(data.clientSecret)
     if( data.clientSecret){
       setClientSecret(data.clientSecret)
       setDpmCheckerLink(data.dpmCheckerLink);
       setModal(false)
     }
-      // [DEV] For demo purposes only
     });
 }
 console.log(clientSecret)
@@ -118,7 +116,7 @@ className=" rounded-lg"
     <DialogContent>
     {clientSecret != "" && (
         <Elements  options={{clientSecret :clientSecret}} stripe={stripe}  >
-      
+      <DialogTitle hidden={true}>d</DialogTitle>
        <CheckoutForm dpmCheckerLink={dpmCheckerLink} />
               </Elements>
       )
