@@ -3,7 +3,6 @@ import "./globals.css";
 import { getUser } from "./api/auth/[...nextauth]/route";;
 import ConvexClientProvider from "@/ConvexClientProvider";
 import ProtectRoute from "./routeProtect";
-import { ThemeProvider } from "./theme-provider"
 import { useTheme } from "next-themes";
 export const metadata: Metadata = {
   title: "DreamShop",

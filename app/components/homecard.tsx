@@ -58,7 +58,7 @@ console.log(data.clientSecret)
 }
 console.log(clientSecret)
     return(
-<div className=" bg-white w-[300px] h-auto flex flex-col justify-center items-center     p-3 rounded-lg  gap-4">
+<div className=" bg-white w-[300px] h-autoflex flex-col justify-center items-center     p-3 rounded-lg  gap-4">
 {/*isHome === true ?( 
 <div className="w-[200px] h-[100px]   justify-center items-center flex  rounded-md  ">
 <div className=" flex  gap-2 w- bg-white rounded-lg">
